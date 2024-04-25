@@ -1,12 +1,16 @@
 import org.example.PhoneBook;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PhoneBookTest {
-
-    @RepeatedTest(2) 
+    @RepeatedTest(2) // вторым повторением теста проверяем на отсутствие дублирования имени в книге
     public void testAdd_result() {
         // given:
         final String name = "TestName";
@@ -28,6 +32,7 @@ public class PhoneBookTest {
         final String result = PhoneBook.findByNumber(number);
         // then:
         assertEquals(original, result);
+
     }
 
     @Test
@@ -39,6 +44,31 @@ public class PhoneBookTest {
         final long result = PhoneBook.findByName(name);
         // then:
         assertEquals(original, result);
+
     }
 
+
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
+
+    @Test
+    public void testPrintAllNames() {
+        // given:
+
+        // when:
+        PhoneBook.printAllNames();
+        // then:
+        assertEquals("TestName", outputStreamCaptor.toString().trim());
+
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
 }
