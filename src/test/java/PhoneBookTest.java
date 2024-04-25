@@ -39,8 +39,6 @@ public class PhoneBookTest {
         final long result = PhoneBook.findByName(name);
         // then:
         assertEquals(original, result);
-
     }
-
 
 }
