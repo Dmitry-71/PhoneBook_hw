@@ -12,6 +12,11 @@ public class PhoneBook {
         return phoneBook.size();
     }
     public static String findByNumber(long number) {
-        return null;
+        Optional<String> result = phoneBook.entrySet().stream()
+                .filter(n -> n.getValue().equals(number))
+                .map(Map.Entry::getKey)
+                .findFirst();
+
+        return result.orElse("");
     }
 }
