@@ -1,5 +1,6 @@
 import org.example.PhoneBook;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,6 +16,19 @@ public class PhoneBookTest {
         final int result = PhoneBook.add(name, number);
         // then:
         assertEquals(original, result);
+    }
+
+    @Test
+    public void testFindByNumber() {
+        // given:
+        final String original = "TestName";
+        final long number = 9999999999L;
+        // when:
+        PhoneBook.phoneBook.put("TestName", 9999999999L);
+        final String result = PhoneBook.findByNumber(number);
+        // then:
+        assertEquals(original, result);
+
     }
 
 }
