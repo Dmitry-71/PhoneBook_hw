@@ -28,7 +28,19 @@ public class PhoneBookTest {
         final String result = PhoneBook.findByNumber(number);
         // then:
         assertEquals(original, result);
+    }
+
+    @Test
+    public void testFindByName() {
+        // given:
+        final String name = "TestName";
+        final long original = 9999999999L;
+        // when:
+        final long result = PhoneBook.findByName(name);
+        // then:
+        assertEquals(original, result);
 
     }
+
 
 }
